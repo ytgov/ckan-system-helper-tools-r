@@ -48,27 +48,6 @@ add_user_to_all_organizations <- function(user_id) {
 # add_user_to_all_organizations(user_id)
 
 
-# Add user to a specific organization -------------------------------------
-
-add_user_to_organization <- function(user_id, organization_name, add_to_all_topics = TRUE) {
-  
-  add_log_entry(str_c("Adding user ", user_id, " to ", organization_name))
-  
-  organization_member_create(
-    id = organization_name,
-    username = user_id,
-    role = "editor"
-  )
-  
-  if(add_to_all_topics == TRUE) {
-    add_user_to_all_groups(user_id)
-  }
-  
-} 
-
-# add_user_to_organization("sean_boots", "environment")
-
-
 # Add user to all groups --------------------------------------------------
 
 add_user_to_all_groups <- function(user_id) {
@@ -95,3 +74,23 @@ add_user_to_all_groups <- function(user_id) {
 
 # add_user_to_all_groups("sean_boots")
 
+
+# Add user to a specific organization -------------------------------------
+
+add_user_to_organization <- function(user_id, organization_name, add_to_all_topics = TRUE) {
+  
+  add_log_entry(str_c("Adding user ", user_id, " to ", organization_name))
+  
+  organization_member_create(
+    id = organization_name,
+    username = user_id,
+    role = "editor"
+  )
+  
+  if(add_to_all_topics == TRUE) {
+    add_user_to_all_groups(user_id)
+  }
+  
+} 
+
+add_user_to_organization("sean_boots", "environment")
