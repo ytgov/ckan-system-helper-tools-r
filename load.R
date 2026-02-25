@@ -54,7 +54,7 @@ add_user_to_all_groups <- function(user_id) {
   
   for (i in seq_along(all_groups)) { 
     
-    add_log_entry(str_c("Adding user ", user_id, " to ", all_groups[i]))
+    add_log_entry(str_c("Adding user ", user_id, " to group ", all_groups[i]))
     
     group_member_create(
       id = all_groups[i],
@@ -79,7 +79,7 @@ add_user_to_all_groups <- function(user_id) {
 
 add_user_to_organization <- function(user_id, organization_name, add_to_all_topics = TRUE) {
   
-  add_log_entry(str_c("Adding user ", user_id, " to ", organization_name))
+  add_log_entry(str_c("Adding user ", user_id, " to organization ", organization_name))
   
   organization_member_create(
     id = organization_name,
