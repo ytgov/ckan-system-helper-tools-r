@@ -1,62 +1,13 @@
-library(tidyverse)
-library(fs)
-library(readxl)
-library(rmarkdown)
-library(janitor)
-library(ckanr)
-library(httr)
-library(lubridate)
-library(DescTools)
+# Load tidyverse libraries, and set up CKAN URLs and API tokens
+source("lib/ckan_helpers.R")
 
-
-# Initial setup -----------------------------------------------------------
-
-run_log <- tribble(
-  ~time, ~message
-)
-
-# Logging helper function
-add_log_entry <- function(log_text) {
-  
-  new_row = tibble_row(
-    time = now(),
-    message = log_text
-  )
-  
-  run_log <<- run_log |>
-    bind_rows(
-      new_row
-    )
-  
-  cat(log_text, "\n")
-}
-
-run_start_time <- now()
-add_log_entry(str_c("Start time was: ", run_start_time))
-
-if(file_exists(".env")) {
-  readRenviron(".env")
-  
-  ckan_url <- Sys.getenv("ckan_url")
-  ckan_api_token <- Sys.getenv("ckan_api_token")
-  
-} else {
-  stop("No .env file found, create it before running this script.")
-}
-
-ckanr_setup(
-  url = ckan_url, 
-  key = ckan_api_token
-)
-
-
-
-# Get a list of organization IDs ------------------------------------------
+# Get a list of organization IDs, groups, and users -----------------------
 
 organizations <- organization_list(
   as = "table"
 )
 
+# "groups" is a reserved variable name
 all_groups <- group_list(
   as = "table"
 )
@@ -65,6 +16,9 @@ users <- user_list(
   order_by = "created",
   as = "table"
 )
+
+
+# Add a user to all organizations -----------------------------------------
 
 # For ATIPP Office staff, add them to all CKAN organizations:
 add_user_to_all_organizations <- function(user_id) {
@@ -90,9 +44,8 @@ add_user_to_all_organizations <- function(user_id) {
 }
 
 # Intended user ID
-# user_id <- "kylie_campbell_clarke"
+# user_id <- "sean_boots"
 # add_user_to_all_organizations(user_id)
-
 
 
 # Add user to a specific organization -------------------------------------
@@ -113,7 +66,8 @@ add_user_to_organization <- function(user_id, organization_name, add_to_all_topi
   
 } 
 
-# add_user_to_organization("charlotte_rentmeister", "environment")
+# add_user_to_organization("sean_boots", "environment")
+
 
 # Add user to all groups --------------------------------------------------
 
@@ -139,5 +93,5 @@ add_user_to_all_groups <- function(user_id) {
 }
 
 
-# add_user_to_all_groups("charlotte_rentmeister")
+# add_user_to_all_groups("sean_boots")
 
