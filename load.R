@@ -93,4 +93,4 @@ add_user_to_organization <- function(user_id, organization_name, add_to_all_topi
   
 } 
 
-add_user_to_organization("sean_boots", "environment")
+# add_user_to_organization("sean_boots", "environment")
