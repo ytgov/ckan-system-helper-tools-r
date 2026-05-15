@@ -17,7 +17,9 @@ run_log <- tribble(
 )
 
 # Logging helper function
-add_log_entry <- function(log_text) {
+add_log_entry <- function(...) {
+  
+  log_text <- str_c(...)
   
   new_row = tibble_row(
     time = now(),
