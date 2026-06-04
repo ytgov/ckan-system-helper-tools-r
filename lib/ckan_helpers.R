@@ -52,3 +52,18 @@ if(file_exists(".env")) {
 }
 
 
+update_internal_notes <- function(package_id, internal_notes) {
+  
+  package_update_fields <- list(
+    id = package_id,
+    internal_notes = internal_notes
+  )
+  
+  package_patch(
+    x = package_update_fields
+  )
+  
+}
+
+# Usage:
+# update_internal_notes("00003-test-open-information-publication", str_c("Newly updated internal notes at ", now()))
