@@ -13,7 +13,7 @@ To connect to the CKAN 2.11 API, this requires the development version of [ckanr
 
 ## Running user helper tools
 
-The user helper functions are in `load.R`. They're currently manually called with the specified user name (retrieved from the `users` data frame after the script first runs).
+The user helper functions are in `user_changes.R`. They're currently manually called with the specified user name (retrieved from the `users` data frame after the script first runs).
 
 ## For more information
 
