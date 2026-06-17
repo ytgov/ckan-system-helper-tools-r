@@ -147,11 +147,7 @@ output <- loop_get_package_resource_totals()
 output |> 
   arrange(desc(metadata_created)) |> 
   write_csv(
-<<<<<<< HEAD
     file = "resources_by_dataset.csv"
-=======
-    file = "output/resources_by_dataset.csv"
->>>>>>> c3fee806035c99d56d058e56d46c150df2c137be
   )
 
 run_end_time <- now()
