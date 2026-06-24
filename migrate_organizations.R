@@ -1,6 +1,8 @@
 # Load tidyverse libraries, and set up CKAN URLs and API tokens
 source("lib/ckan_helpers.R")
 
+output <- get_all_package_details()
+
 # Migrate all the datasets from one organization to another one
 org_1 = ""
 org_2 =""
